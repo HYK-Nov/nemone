@@ -23,7 +23,6 @@ namespace Nemone
 
         private void MainHubLayout()
         {
-            this.MaximizeBox = false;
             Panel bottomSpacer = new Panel
             {
                 Height = 80,
@@ -31,27 +30,34 @@ namespace Nemone
                 Margin = new Padding(0),
                 Enabled = false
             };
-            flowLayoutPanel1.Controls.Add(bottomSpacer);
+            flowLayoutPanel.Controls.Add(bottomSpacer);
         }
 
-        private void btnNewMake_Click(object sender, EventArgs e)
-        {
-            MakeForm makeForm = new MakeForm();
-            makeForm.FormClosed += MakeForm_FormClosed;
-            makeForm.Show();
-            this.Hide();
-        }
-
-        private void MakeForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void OtherForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // 두 번째 폼이 닫힐 때 첫 번째 폼도 종료
             this.Show();
         }
 
-        private void btnMakeImg_Click(object sender, EventArgs e)
+        private void btnNewMake_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = "Image Files|*.png;*.jpeg";
-            openFileDialog.ShowDialog();
+            MakeForm makeForm = new MakeForm();
+            makeForm.FormClosed += OtherForm_FormClosed;
+            makeForm.Show();
+            this.Hide();
+        }
+
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            PlayForm playForm = new PlayForm();
+            ofd.Filter = "Nemo Files (*.nemo)|*.nemo";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                playForm.FormClosed += OtherForm_FormClosed;
+                playForm.Show();
+                this.Hide();
+            }
         }
     }
 }

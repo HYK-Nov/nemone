@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HintPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HintPanelControl.Designer.cs">
+      <DependentUpon>HintPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageBinarizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageBinarizeForm.Designer.cs">
+      <DependentUpon>ImageBinarizeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainHubForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,11 +70,17 @@
     <Compile Include="MakeForm.Designer.cs">
       <DependentUpon>MakeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NemoGrid.cs">
+    <Compile Include="NemoGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NemoGrid.Designer.cs">
-      <DependentUpon>NemoGrid.cs</DependentUpon>
+    <Compile Include="NemoGridControl.Designer.cs">
+      <DependentUpon>NemoGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayForm.Designer.cs">
+      <DependentUpon>PlayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PlayPanel.cs">
       <SubType>UserControl</SubType>
@@ -72,14 +90,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="HintPanelControl.resx">
+      <DependentUpon>HintPanelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageBinarizeForm.resx">
+      <DependentUpon>ImageBinarizeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainHubForm.resx">
       <DependentUpon>MainHubForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MakeForm.resx">
       <DependentUpon>MakeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NemoGrid.resx">
-      <DependentUpon>NemoGrid.cs</DependentUpon>
+    <EmbeddedResource Include="NemoGridControl.resx">
+      <DependentUpon>NemoGridControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayForm.resx">
+      <DependentUpon>PlayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

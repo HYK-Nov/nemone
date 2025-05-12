@@ -3,23 +3,11 @@
   "WorkspaceRootPath": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\nemogrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:nemogrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\mainhubform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:mainhubform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\nemogrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:nemogrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\makeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:makeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\makeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\makeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:makeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -30,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,64 +30,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainHubForm.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MainHubForm.cs",
-              "RelativeDocumentMoniker": "MainHubForm.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MainHubForm.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "MainHubForm.cs [\uB514\uC790\uC778]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T11:08:00.114Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NemoGrid.cs",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\NemoGrid.cs",
-              "RelativeDocumentMoniker": "NemoGrid.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\NemoGrid.cs",
-              "RelativeToolTip": "NemoGrid.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFwAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T11:01:48.544Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NemoGrid.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\NemoGrid.cs",
-              "RelativeDocumentMoniker": "NemoGrid.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\NemoGrid.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "NemoGrid.cs [\uB514\uC790\uC778]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T11:01:46.773Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "MakeForm.cs",
               "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MakeForm.cs",
               "RelativeDocumentMoniker": "MakeForm.cs",
               "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MakeForm.cs",
               "RelativeToolTip": "MakeForm.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAlwC8AAAArAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwC0AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T10:04:37.049Z",
+              "WhenOpened": "2025-05-12T06:12:18.075Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MakeForm.cs [\uB514\uC790\uC778]",
               "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MakeForm.cs",
               "RelativeDocumentMoniker": "MakeForm.cs",
               "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MakeForm.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "MakeForm.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T09:49:19.812Z",
+              "WhenOpened": "2025-05-12T06:12:16.23Z",
               "EditorCaption": " [\uB514\uC790\uC778]"
             }
           ]

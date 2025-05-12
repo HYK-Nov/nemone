@@ -1,6 +1,6 @@
 ﻿namespace Nemone
 {
-    partial class NemoGrid
+    partial class HintPanelControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -30,12 +30,11 @@
         {
             this.SuspendLayout();
             // 
-            // NemoGrid
+            // HintPanelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "NemoGrid";
-            this.Size = new System.Drawing.Size(300, 300);
+            this.Name = "HintPanelControl";
             this.ResumeLayout(false);
 
         }
