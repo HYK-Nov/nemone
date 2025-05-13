@@ -1,6 +1,6 @@
 ﻿namespace Nemone
 {
-    partial class PlayPanel
+    partial class BaseNemoGridControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.

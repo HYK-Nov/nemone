@@ -13,7 +13,7 @@ namespace Nemone
 {
     public partial class MakeForm: Form
     {
-        NemoGridControl nemoGrid = new NemoGridControl
+        NemoEditor nemoEditor = new NemoEditor
         {
             GridSize = 10,
             Size = new Size(550, 550)
@@ -22,7 +22,7 @@ namespace Nemone
         public MakeForm()
         {
             InitializeComponent();
-            container.Panel1.Controls.Add(nemoGrid);
+            container.Panel1.Controls.Add(nemoEditor);
             this.Resize += MakeForm_Resize;
             CenterComponents();
         }
@@ -33,9 +33,9 @@ namespace Nemone
             int targetSize = (int)(baseSize * 0.9);
 
             // 그리드 크기 변경
-            nemoGrid.Size = new Size(targetSize, targetSize);
-            nemoGrid.Location = new Point((container.Panel1.Width - nemoGrid.Width) / 2,
-                                          (container.Panel1.Height - nemoGrid.Height) / 2);
+            nemoEditor.Size = new Size(targetSize, targetSize);
+            nemoEditor.Location = new Point((container.Panel1.Width - nemoEditor.Width) / 2,
+                                          (container.Panel1.Height - nemoEditor.Height) / 2);
             groupBox.Location = new Point((container.Panel2.Width - groupBox.Width) / 2,
                                           groupBox.Location.Y);
             btnSave.Location = new Point((container.Panel2.Width - btnSave.Width) / 2,
@@ -48,18 +48,18 @@ namespace Nemone
 
         private void ApplyBinarizedToGrid(int[,] data)
         {
-            int size = nemoGrid.GridSize;
+            int size = nemoEditor.GridSize;
 
             for (int y = 0; y < size; y++)
             {
                 for (int x = 0; x < size; x++)
                 {
-                    nemoGrid.gridState[y, x] = data[y, x];
+                    nemoEditor.GridState[y, x] = data[y, x];
                 }
             }
 
             // 화면 다시 그리기
-            nemoGrid.Invalidate();
+            nemoEditor.Invalidate();
         }
 
 
@@ -73,7 +73,7 @@ namespace Nemone
             sfd.Filter = "Nemo Files (*.nemo)|*.nemo";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                nemoGrid.SaveToFile(sfd.FileName);
+                nemoEditor.SaveToFile(sfd.FileName);
                 MessageBox.Show("저장되었습니다");
                 this.Close();
             }
@@ -85,7 +85,7 @@ namespace Nemone
             ofd.Filter = "Nemo Files (*.nemo)|*.nemo";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                nemoGrid.LoadFromFile(ofd.FileName);
+                nemoEditor.LoadFromFile(ofd.FileName);
 
                 // 라디오 버튼 변경
                 var radioMap = new Dictionary<int, RadioButton>
@@ -99,7 +99,7 @@ namespace Nemone
                     { 40, rd40 }
                 };
 
-                if (radioMap.TryGetValue(nemoGrid.GridSize, out RadioButton selectedRadio))
+                if (radioMap.TryGetValue(nemoEditor.GridSize, out RadioButton selectedRadio))
                 {
                     selectedRadio.Checked = true;
                 }
@@ -118,7 +118,7 @@ namespace Nemone
             if (ofd.ShowDialog() == DialogResult.OK) 
             {
                 string imagePath = ofd.FileName;
-                int size = nemoGrid.GridSize;
+                int size = nemoEditor.GridSize;
                 Bitmap original = new Bitmap(imagePath);
                 
 
@@ -134,57 +134,57 @@ namespace Nemone
 
         private void rd10_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd10.Checked && nemoGrid.GridSize != 10)
+            if (rd10.Checked && nemoEditor.GridSize != 10)
             {
-                nemoGrid.GridSize = 10;
+                nemoEditor.GridSize = 10;
             }
         }
 
         private void rd15_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd15.Checked && nemoGrid.GridSize != 15)
+            if (rd15.Checked && nemoEditor.GridSize != 15)
             {
-                nemoGrid.GridSize = 15;
+                nemoEditor.GridSize = 15;
             }
         }
 
         private void rd20_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd20.Checked && nemoGrid.GridSize != 20)
+            if (rd20.Checked && nemoEditor.GridSize != 20)
             {
-                nemoGrid.GridSize = 20;
+                nemoEditor.GridSize = 20;
             }
         }
 
         private void rd25_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd25.Checked && nemoGrid.GridSize != 25)
+            if (rd25.Checked && nemoEditor.GridSize != 25)
             {
-                nemoGrid.GridSize = 25;
+                nemoEditor.GridSize = 25;
             }
         }
 
         private void rd30_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd30.Checked && nemoGrid.GridSize != 30)
+            if (rd30.Checked && nemoEditor.GridSize != 30)
             {
-                nemoGrid.GridSize = 30;
+                nemoEditor.GridSize = 30;
             }
         }
 
         private void rd35_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd35.Checked && nemoGrid.GridSize != 35)
+            if (rd35.Checked && nemoEditor.GridSize != 35)
             {
-                nemoGrid.GridSize = 35;
+                nemoEditor.GridSize = 35;
             }
         }
 
         private void rd40_CheckedChanged(object sender, EventArgs e)
         {
-            if (rd40.Checked && nemoGrid.GridSize != 40)
+            if (rd40.Checked && nemoEditor.GridSize != 40)
             {
-                nemoGrid.GridSize = 40;
+                nemoEditor.GridSize = 40;
             }
         }
     }

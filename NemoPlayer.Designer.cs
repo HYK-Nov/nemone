@@ -1,6 +1,6 @@
 ﻿namespace Nemone
 {
-    partial class HintPanelControl
+    partial class NemoPlayer
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,17 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
-            // HintPanelControl
+            // tableLayout
+            // 
+            this.tableLayout.ColumnCount = 2;
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayout.Location = new System.Drawing.Point(0, 0);
+            this.tableLayout.Name = "tableLayout";
+            this.tableLayout.RowCount = 2;
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayout.Size = new System.Drawing.Size(606, 600);
+            this.tableLayout.TabIndex = 0;
+            // 
+            // NemoPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "HintPanelControl";
+            this.Name = "NemoPlayer";
+            this.Size = new System.Drawing.Size(606, 600);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+        private System.Windows.Forms.TableLayoutPanel tableLayout;
     }
 }

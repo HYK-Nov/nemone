@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -49,11 +50,11 @@ namespace Nemone
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-            PlayForm playForm = new PlayForm();
             ofd.Filter = "Nemo Files (*.nemo)|*.nemo";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                PlayForm playForm = new PlayForm(ofd.FileName);
                 playForm.FormClosed += OtherForm_FormClosed;
                 playForm.Show();
                 this.Hide();

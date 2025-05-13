@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,11 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HintPanelControl.cs">
+    <Compile Include="BaseNemoGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HintPanelControl.Designer.cs">
-      <DependentUpon>HintPanelControl.cs</DependentUpon>
+    <Compile Include="BaseNemoGridControl.Designer.cs">
+      <DependentUpon>BaseNemoGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NemoPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NemoPlayer.Designer.cs">
+      <DependentUpon>NemoPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageBinarizeForm.cs">
       <SubType>Form</SubType>
@@ -70,11 +79,11 @@
     <Compile Include="MakeForm.Designer.cs">
       <DependentUpon>MakeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NemoGridControl.cs">
+    <Compile Include="NemoEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NemoGridControl.Designer.cs">
-      <DependentUpon>NemoGridControl.cs</DependentUpon>
+    <Compile Include="NemoEditor.Designer.cs">
+      <DependentUpon>NemoEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="PlayForm.cs">
       <SubType>Form</SubType>
@@ -82,16 +91,16 @@
     <Compile Include="PlayForm.Designer.cs">
       <DependentUpon>PlayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PlayPanel.Designer.cs">
-      <DependentUpon>PlayPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="HintPanelControl.resx">
-      <DependentUpon>HintPanelControl.cs</DependentUpon>
+    <Compile Include="RowHintControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RowHintControl.Designer.cs">
+      <DependentUpon>RowHintControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="NemoPlayer.resx">
+      <DependentUpon>NemoPlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageBinarizeForm.resx">
       <DependentUpon>ImageBinarizeForm.cs</DependentUpon>
@@ -102,8 +111,8 @@
     <EmbeddedResource Include="MakeForm.resx">
       <DependentUpon>MakeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NemoGridControl.resx">
-      <DependentUpon>NemoGridControl.cs</DependentUpon>
+    <EmbeddedResource Include="NemoEditor.resx">
+      <DependentUpon>NemoEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayForm.resx">
       <DependentUpon>PlayForm.cs</DependentUpon>

@@ -7,21 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
 using System.IO;
-using static System.Windows.Forms.AxHost;
 
 namespace Nemone
 {
-    public partial class NemoGridControl: UserControl
+    public partial class BaseNemoGridControl: UserControl
     {
         private const int MIN_SIZE = 10;
         private const int MAX_SIZE = 40;
         private int gridSize = MIN_SIZE;  // 기본 minsize
-        public int[,] gridState;
-        private Point? hoveredCell = null;
-        private Point? pressedCell = null;
+        protected Point? hoveredCell = null;
+        protected Point? pressedCell = null;
 
+        public int[,] GridState { get; set; }
         public int GridSize
         {
             get => gridSize;
@@ -33,7 +31,7 @@ namespace Nemone
                 }
 
                 gridSize = value;
-                gridState = new int[gridSize, gridSize];
+                GridState = new int[gridSize, gridSize];
 
                 Invalidate();
             }
@@ -48,18 +46,18 @@ namespace Nemone
             }
         }
 
-        public NemoGridControl()
+        public BaseNemoGridControl()
         {
             DoubleBuffered = true;
-            gridState = new int[gridSize, gridSize];
-            this.MouseDown += NemoGrid_MouseDown;
+            GridState = new int[gridSize, gridSize];
+            this.MouseDown += OnMouseDownInternal;
             this.MouseUp += (s, e) => { pressedCell = null; Invalidate(); };
-            this.MouseMove += NemoGrid_MouseMove;
+            this.MouseMove += OnMouseMoveInternal;
             this.MouseLeave += (s, e) => { hoveredCell = null; Invalidate(); };
             this.Resize += (s, e) => Invalidate();
         }
 
-        private void NemoGrid_MouseDown(object sender, MouseEventArgs e)
+        protected virtual void OnMouseDownInternal(object sender, MouseEventArgs e)
         {
             if (CellSize <= 0) return;
 
@@ -77,11 +75,11 @@ namespace Nemone
 
             if (e.Button == MouseButtons.Left)
             {
-                gridState[y, x] = gridState[y, x] == 1 ? 0 : 1;
+                GridState[y, x] = GridState[y, x] == 1 ? 0 : 1;
             }
             else if (e.Button == MouseButtons.Right)
             {
-                gridState[y, x] = gridState[y, x] == 2 ? 0 : 2;
+                GridState[y, x] = GridState[y, x] == 2 ? 0 : 2;
             }
 
             var newPressed = new Point(x, y);
@@ -93,7 +91,7 @@ namespace Nemone
             Invalidate();
         }
 
-        private void NemoGrid_MouseMove(object sender, MouseEventArgs e)
+        protected virtual void OnMouseMoveInternal(object sender, MouseEventArgs e)
         {
             if (CellSize <= 0) return;
 
@@ -117,11 +115,14 @@ namespace Nemone
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        override protected void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            Graphics g = e.Graphics;
+            DrawGrid(e.Graphics);
+        }
 
+        protected virtual void DrawGrid(Graphics g)
+        {
             int cellSize = CellSize;
 
             for (int y = 0; y < gridSize; y++)
@@ -129,14 +130,14 @@ namespace Nemone
                 for (int x = 0; x < gridSize; x++)
                 {
                     Rectangle cellRect = new Rectangle(x * cellSize, y * cellSize, cellSize, cellSize);
-                    int value = gridState[y, x];
+                    int value = GridState[y, x];
 
                     Color fillColor = Color.White;
                     if (value == 1) fillColor = Color.Black;
 
                     using (Brush brush = new SolidBrush(fillColor))
                         g.FillRectangle(brush, cellRect);
-                    
+
                     // 셀 hover 효과
                     if (hoveredCell.HasValue && hoveredCell.Value.X == x && hoveredCell.Value.Y == y)
                     {
@@ -152,7 +153,7 @@ namespace Nemone
                     }
 
                     // x 표시
-                    if (gridState[y, x] == 2)
+                    if (GridState[y, x] == 2)
                     {
                         Pen crossPen = Pens.Gray;
                         g.DrawLine(crossPen, cellRect.Left, cellRect.Top, cellRect.Right, cellRect.Bottom);
@@ -177,53 +178,8 @@ namespace Nemone
             }
         }
 
+        public virtual void SaveToFile(string filePath) { }
 
-        public void SaveToFile(string filePath)
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(gridSize.ToString());
-            for (int y = 0; y < gridSize; y++)
-            {
-                for (int x = 0; x < gridSize; x++)
-                {
-                    int value = gridState[y, x] == 2 ? 0 : gridState[y, x];
-                    sb.Append(value);
-                    if (x < gridSize - 1)
-                    {
-                        sb.Append(",");
-                    }
-                }
-                sb.AppendLine();
-            }
-
-            string plainText = sb.ToString();
-            File.WriteAllText(filePath, plainText);
-        }
-
-        public void LoadFromFile(string filePath)
-        {
-            string plainText = File.ReadAllText(filePath);
-            var lines = plainText.Split(new[] { "\r\n", "\n"}, StringSplitOptions.None);
-
-            if (lines.Length == 0) return;
-
-            if (int.TryParse(lines[0], out int newSize))
-            {
-                GridSize = newSize; // 자동으로 CreateGrid 호출
-            }
-
-            for (int y = 0; y < gridSize && y+1 < lines.Length; y++)    // line[1]부터 실제 데이터
-            {
-                var tokens = lines[y + 1].Split(',');
-                for (int x = 0; x < gridSize && x < tokens.Length; x++)
-                {
-                    if (int.TryParse(tokens[x], out int value))
-                    {
-                        gridState[y, x] = value;
-                    }
-                }
-            }
-        }
+        public virtual void LoadFromFile(string filePath) { }
     }
 }

@@ -3,7 +3,6 @@ D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Nemone.exe.config
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.AssemblyReference.cache
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.MainHubForm.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.MakeForm.resources
-D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.NemoGrid.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.PlayForm.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.Properties.Resources.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.GenerateResource.cache
@@ -12,3 +11,5 @@ D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.exe
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.pdb
 D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Nemone.pdb
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.ImageBinarizeForm.resources
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.NemoPlayer.resources
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.NemoEditor.resources

@@ -1,6 +1,6 @@
 ﻿namespace Nemone
 {
-    partial class NemoGridControl
+    partial class RowHintControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,16 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // NemoGrid
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "NemoGrid";
-            this.Size = new System.Drawing.Size(300, 300);
-            this.ResumeLayout(false);
-
         }
 
         #endregion
