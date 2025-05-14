@@ -50,7 +50,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "NemoPlayer";
-            this.Size = new System.Drawing.Size(606, 600);
+            this.Size = new System.Drawing.Size(300, 300);
             this.ResumeLayout(false);
 
         }

@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.Json;
 
 namespace Nemone
 {
     public partial class NemoPlayer: BaseNemoGridControl
     {
-        private List<List<int>> rowHints = new List<List<int>>();
-        private List<List<int>> colHints = new List<List<int>>();
+        public List<List<int>> rowHints { get; private set; }
+        public List<List<int>> colHints { get; private set; }
         private int[,] solutionGrid;
 
         public NemoPlayer(string filePath)
@@ -28,6 +29,8 @@ namespace Nemone
 
         private void GetRowHints()
         {
+            rowHints = new List<List<int>>();
+
             for (int y = 0; y < GridSize; y++)
             {
                 List<int> hints = new List<int>();
@@ -52,6 +55,8 @@ namespace Nemone
 
         private void GetColHints()
         {
+            colHints = new List<List<int>>();
+
             for (int x = 0; x < GridSize; x++)
             {
                 List<int> hints = new List<int>();
@@ -77,13 +82,13 @@ namespace Nemone
             }
         }
 
-        private bool IsCorrect()
+        private async Task<bool> IsCorrectAsync()
         {
             for (int y = 0; y < GridSize; y++)
             {
                 for (int x = 0; x < GridSize; x++)
                 {
-                    if (GridState[y, x] != solutionGrid[y, x])
+                    if ((GridState[y, x] == 2 ? 0 : GridState[y, x]) != solutionGrid[y, x])
                     {
                         return false;
                     }
@@ -92,11 +97,12 @@ namespace Nemone
             return true;
         }
 
-        private void CheckAnswer()
+        private async Task CheckAnswerAsync()
         {
-            if (IsCorrect())
+            bool isCorrect = await IsCorrectAsync();
+            if (isCorrect)
             {
-                MessageBox.Show("정답입니다!", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("완성!", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.FindForm().Close();
             }
         }
@@ -105,94 +111,35 @@ namespace Nemone
         {
             base.OnMouseDownInternal(sender, e);
 
-            CheckAnswer();
-        }
-
-        private void DrawRowHints(Graphics g)
-        {
-            int cellSize = CellSize;
-            int offsetX = 5 * cellSize;
-
-            for (int y = 0; y < GridSize; y++)
-            {
-                var hints = rowHints[y];
-                string hintText = string.Join(" ", hints);
-                Rectangle rect = new Rectangle(0, y * cellSize, offsetX, cellSize);
-                TextRenderer.DrawText(g, hintText, Font, rect, Color.Black, 
-                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
-            }
-        }
-
-        private void DrawColHints(Graphics g)
-        {
-            int cellSize = CellSize;
-            int offsetY = 5 * cellSize;
-            int hintMargin = 2;
-
-            for (int x = 0; x < GridSize; x++)
-            {
-                var hints = colHints[x];
-                string hintText = string.Join(" ", hints);
-
-                int totalHeight = hints.Count * (Font.Height + hintMargin);
-                int startY = offsetY - totalHeight;
-
-                for (int i = 0; i < hints.Count; i++)
-                {
-                    string hint = hints[i].ToString();
-                    float posX = x * cellSize + (cellSize / 2);
-                    float posY = startY + i * (Font.Height + hintMargin);
-
-                    // 가운데 정렬용 크기 측정
-                    Size textSize = TextRenderer.MeasureText(hint, Font);
-                    Rectangle drawRect = new Rectangle(
-                        (int)(posX - textSize.Width / 2),
-                        (int)posY,
-                        textSize.Width,
-                        textSize.Height
-                    );
-
-                    TextRenderer.DrawText(g, hint, Font, drawRect, Color.Black,
-                        TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                }
-            }
-        }
-
-        override protected void DrawGrid(Graphics g)
-        {
-            base.DrawGrid(g);
-
-            //DrawRowHints(g);
-            //DrawColHints(g);
+            // 백그라운드 스레드에서 비동기 메서드를 실행
+            Task.Run(async () => await CheckAnswerAsync());
         }
 
         override public void LoadFromFile(string filePath)
         {
-            string plainText = File.ReadAllText(filePath);
-            var lines = plainText.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+            string json = File.ReadAllText(filePath);
+            var data = JsonSerializer.Deserialize<NemoData>(json);
 
-            if (lines.Length == 0) return;
+            if (data == null || data.GridSize <= 0 || data.GridState == null) return;
 
-            if (int.TryParse(lines[0], out int newSize))
+            this.GridSize = data.GridSize;
+            solutionGrid = new int[data.GridSize, data.GridSize];
+
+            for (int y = 0; y < GridSize; y++)
             {
-                GridSize = newSize;
-                solutionGrid = new int[newSize, newSize];
-            }
-
-            for (int y = 0; y < GridSize && y + 1 < lines.Length; y++)    // line[1]부터 실제 데이터
-            {
-                var tokens = lines[y + 1].Split(',');
-                for (int x = 0; x < GridSize && x < tokens.Length; x++)
+                for (int x = 0; x < GridSize; x++)
                 {
-                    if (int.TryParse(tokens[x], out int value))
-                    {
-                        solutionGrid[y, x] = value;
-                    }
+                    solutionGrid[y, x] = data.GridState[y][x];
                 }
             }
 
             Invalidate();
         }
 
+        override protected void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            Invalidate(); // 크기 변경 시 다시 그리기
+        }
     }
 }

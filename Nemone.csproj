@@ -38,6 +38,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +57,13 @@
     <Compile Include="BaseNemoGridControl.Designer.cs">
       <DependentUpon>BaseNemoGridControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColHintControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColHintControl.Designer.cs">
+      <DependentUpon>ColHintControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NemoData.cs" />
     <Compile Include="NemoPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -73,11 +82,11 @@
     <Compile Include="MainHubForm.Designer.cs">
       <DependentUpon>MainHubForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MakeForm.cs">
+    <Compile Include="EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MakeForm.Designer.cs">
-      <DependentUpon>MakeForm.cs</DependentUpon>
+    <Compile Include="EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NemoEditor.cs">
       <SubType>UserControl</SubType>
@@ -108,8 +117,8 @@
     <EmbeddedResource Include="MainHubForm.resx">
       <DependentUpon>MainHubForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MakeForm.resx">
-      <DependentUpon>MakeForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NemoEditor.resx">
       <DependentUpon>NemoEditor.cs</DependentUpon>
@@ -127,6 +136,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RowHintControl.resx">
+      <DependentUpon>RowHintControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

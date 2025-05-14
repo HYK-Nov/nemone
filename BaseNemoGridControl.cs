@@ -40,9 +40,13 @@ namespace Nemone
         {
             get
             {
-                int cellWidth = Width / gridSize;
-                int cellHeight = Width / gridSize;
-                return Math.Min(cellWidth, cellHeight); // 가장 작은 값으로 셀 크기 결정
+                if (Width > 0 && Height > 0)
+                {
+                    int cellWidth = Width / gridSize;
+                    int cellHeight = Height / gridSize;
+                    return Math.Min(cellWidth, cellHeight); // 가장 작은 값으로 셀 크기 결정
+                }
+                return 0;
             }
         }
 
@@ -71,11 +75,12 @@ namespace Nemone
                     pressedCell = null;
                     Invalidate();
                 }
+                return;
             }
 
             if (e.Button == MouseButtons.Left)
             {
-                GridState[y, x] = GridState[y, x] == 1 ? 0 : 1;
+                GridState[y, x] = GridState[y, x] == 0 ? 1 : 0;
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -86,7 +91,6 @@ namespace Nemone
             if (pressedCell != newPressed)
             {
                 pressedCell = newPressed;
-                Invalidate();
             }
             Invalidate();
         }

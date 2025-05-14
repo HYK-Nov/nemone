@@ -2,7 +2,6 @@ D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Nemone.exe
 D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Nemone.exe.config
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.AssemblyReference.cache
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.MainHubForm.resources
-D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.MakeForm.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.PlayForm.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.Properties.Resources.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.GenerateResource.cache
@@ -13,3 +12,17 @@ D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Nemone.pdb
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.ImageBinarizeForm.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.NemoPlayer.resources
 D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.NemoEditor.resources
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.RowHintControl.resources
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.EditorForm.resources
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Memory.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Text.Json.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Numerics.Vectors.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Buffers.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.ValueTuple.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Text.Encodings.Web.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.SuggestedBindingRedirects.cache
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.exe.config
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.csproj.Up2Date

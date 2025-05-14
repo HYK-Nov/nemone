@@ -16,18 +16,23 @@ namespace Nemone
     public partial class PlayForm : Form
     {
         private NemoPlayer nemoPlayer;
+        private RowHintControl rowHint;
+        private ColHintControl colHint;
 
         public PlayForm(string filePath)
         {
             InitializeComponent();
 
             nemoPlayer = new NemoPlayer(filePath);
-            int targetSize = Math.Min(ClientSize.Width, ClientSize.Height);
-            nemoPlayer.Size = new Size(targetSize, targetSize);
-            Console.WriteLine(targetSize);
-            //this.Controls.Add(nemoPlayer);
             tableLayoutPanel.Controls.Add(nemoPlayer, 1, 1);
-            
+
+            rowHint = new RowHintControl(nemoPlayer.rowHints);
+            rowHint.Dock = DockStyle.Right;
+            colHint = new ColHintControl(nemoPlayer.colHints);
+            colHint.Dock = DockStyle.Bottom;
+
+            tableLayoutPanel.Controls.Add(rowHint, 0, 1);
+            tableLayoutPanel.Controls.Add(colHint, 1, 0);
 
             this.Resize += PlayForm_Resize;
             CenterComponents();
@@ -35,10 +40,24 @@ namespace Nemone
 
         private void CenterComponents()
         {
-            int targetSize = (int)(Math.Min(ClientSize.Width, ClientSize.Height) * 0.9);
+            int tableSize = (int)(Math.Min(ClientSize.Width, ClientSize.Height) * 0.95);
+            tableLayoutPanel.Size = new Size(tableSize, tableSize);
+            tableLayoutPanel.Location = new Point((ClientSize.Width - tableLayoutPanel.Width)/2,
+                                                (ClientSize.Height - tableLayoutPanel.Height) / 2);
+
+            int targetWidth = tableLayoutPanel.GetColumnWidths()[1];
+            int targetHeight = tableLayoutPanel.GetRowHeights()[1];
+            int targetSize = (int)(Math.Min(targetWidth, targetHeight)) - 2;
+
             nemoPlayer.Size = new Size(targetSize, targetSize);
-            nemoPlayer.Location = new Point((ClientSize.Width - nemoPlayer.Width) / 2,
-                                            (ClientSize.Height - nemoPlayer.Height) / 2);
+
+            rowHint.CellSize = nemoPlayer.CellSize;
+            colHint.CellSize = nemoPlayer.CellSize;
+
+            rowHint.Width = nemoPlayer.CellSize * (nemoPlayer.rowHints.Select(hints => hints.Count).DefaultIfEmpty(0).Max()+1);
+            colHint.Height = nemoPlayer.CellSize * (nemoPlayer.colHints.Select(hints => hints.Count).DefaultIfEmpty(0).Max()+1);
+
+            colHint.Invalidate();
         }
 
         private void PlayForm_Resize(object sender, EventArgs e)

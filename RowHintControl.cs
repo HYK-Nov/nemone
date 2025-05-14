@@ -13,14 +13,22 @@ namespace Nemone
     public partial class RowHintControl: UserControl
     {
         public List<List<int>> Hints { get; set; }
-        public int CellSize { get; set; } = 25;
+        public int CellSize { get; set; } = 5;
 
-        public RowHintControl()
+        public RowHintControl(List<List<int>> rowHints)
         {
+            Hints = rowHints;
+
             InitializeComponent();
-            Hints = new List<List<int>>();
             DoubleBuffered = true;
-            AutoSize = false;  // AutoSize 제거
+
+            this.Resize += RowHintControl_Resize;
+            Invalidate();
+        }
+
+        private void RowHintControl_Resize(object sender, EventArgs e)
+        {
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -32,32 +40,25 @@ namespace Nemone
 
             foreach (var hintRow in Hints)
             {
-                string hintText = string.Join(" ", hintRow);
+                string hintText = string.Join("  ", hintRow);
                 Rectangle rect = new Rectangle(0, offsetY, Width, CellSize);
-                TextRenderer.DrawText(g, hintText, Font, rect, Color.Black,
-                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+
+                // 박스 위, 아래 선그리기
+                g.DrawLine(Pens.Gray, rect.Left, rect.Top, rect.Right, rect.Top);   // 위
+                g.DrawLine(Pens.Gray, rect.Left, rect.Bottom, rect.Right, rect.Bottom); // 아래
+
+                // 텍스트 출력 (우측 정렬 + 수직 정렬)
+                TextRenderer.DrawText(
+                    g,
+                    hintText,
+                    new Font(Font.Name, CellSize * 0.5f, FontStyle.Bold),
+                    rect,
+                    Color.Black,
+                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter
+                );
+
                 offsetY += CellSize;
             }
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            Invalidate(); // 크기 변경 시 다시 그리기
-        }
-
-        public void RefreshHints(List<List<int>> newHints)
-        {
-            Hints = newHints;
-            Height = Hints.Count * CellSize; // 힌트에 맞게 높이 계산
-            Width = Parent?.ClientSize.Width ?? 200; // Width를 부모에 맞추거나 고정값으로 설정
-            Invalidate(); // 변경 사항 반영
-        }
-
-        public void AdjustLocation(int gridHeight)
-        {
-            // RowHintControl이 그리드 안으로 침범하지 않도록 위치를 설정
-            Location = new Point(0, gridHeight); // 예시로 그리드 아래에 배치
         }
     }
 }

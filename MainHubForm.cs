@@ -42,7 +42,7 @@ namespace Nemone
 
         private void btnNewMake_Click(object sender, EventArgs e)
         {
-            MakeForm makeForm = new MakeForm();
+            EditorForm makeForm = new EditorForm();
             makeForm.FormClosed += OtherForm_FormClosed;
             makeForm.Show();
             this.Hide();

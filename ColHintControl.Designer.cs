@@ -1,6 +1,6 @@
 ﻿namespace Nemone
 {
-    partial class RowHintControl
+    partial class ColHintControl
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -28,18 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // RowHintControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Font = new System.Drawing.Font("Pretendard Variable", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "RowHintControl";
-            this.Size = new System.Drawing.Size(169, 180);
-            this.ResumeLayout(false);
-
         }
 
         #endregion

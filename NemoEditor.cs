@@ -11,60 +11,60 @@ using System.Configuration;
 using System.IO;
 using static System.Windows.Forms.AxHost;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace Nemone
 {
     public partial class NemoEditor: BaseNemoGridControl
     {
-        public NemoEditor()
-        {
+        public NemoEditor() { }
 
+        public event Action GridChanged;
+
+        override protected void OnMouseDownInternal(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDownInternal(sender, e);
+            GridChanged?.Invoke();
         }
 
         override public void SaveToFile(string filePath)
         {
-            var sb = new StringBuilder();
+            var data = new NemoData
+            {
+                Title = Path.GetFileNameWithoutExtension(filePath),
+                GridSize = this.GridSize,
+                GridState = new int[GridSize][]
+            };
 
-            sb.AppendLine(GridSize.ToString());
+            for (int y = 0; y < GridSize; y++)
+            {
+                data.GridState[y] = new int[GridSize];
+                for (int x = 0; x < GridSize; x++)
+                {
+                    int value = GridState[y, x] == 2 ? 0 : GridState[y, x]; // X표시(2)는 저장 시 0으로
+                    data.GridState[y][x] = value;
+                }
+            }
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(data, options);
+            File.WriteAllText(filePath, json);
+        }
+
+        public override void LoadFromFile(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+            var data = JsonSerializer.Deserialize<NemoData>(json);
+
+            if (data == null || data.GridSize <= 0 || data.GridState == null) return;
+
+            this.GridSize = data.GridSize;
+
             for (int y = 0; y < GridSize; y++)
             {
                 for (int x = 0; x < GridSize; x++)
                 {
-                    int value = GridState[y, x] == 2 ? 0 : GridState[y, x];
-                    sb.Append(value);
-                    if (x < GridSize - 1)
-                    {
-                        sb.Append(",");
-                    }
-                }
-                sb.AppendLine();
-            }
-
-            string plainText = sb.ToString();
-            File.WriteAllText(filePath, plainText);
-        }
-
-        override public void LoadFromFile(string filePath)
-        {
-            string plainText = File.ReadAllText(filePath);
-            var lines = plainText.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-
-            if (lines.Length == 0) return;
-
-            if (int.TryParse(lines[0], out int newSize))
-            {
-                GridSize = newSize; // 자동으로 CreateGrid 호출
-            }
-
-            for (int y = 0; y < GridSize && y + 1 < lines.Length; y++)    // line[1]부터 실제 데이터
-            {
-                var tokens = lines[y + 1].Split(',');
-                for (int x = 0; x < GridSize && x < tokens.Length; x++)
-                {
-                    if (int.TryParse(tokens[x], out int value))
-                    {
-                        GridState[y, x] = value;
-                    }
+                    GridState[y, x] = data.GridState[y][x];
                 }
             }
         }
