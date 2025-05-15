@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Odbc;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,7 +19,6 @@ namespace Nemone
         NemoEditor nemoEditor = new NemoEditor
         {
             GridSize = 10,
-            Size = new Size(550, 550)
         };
 
         public EditorForm()
@@ -26,8 +27,17 @@ namespace Nemone
             panel1.Controls.Add(nemoEditor);
             this.Resize += MakeForm_Resize;
             this.FormClosing += Before_FormClosing;
-            nemoEditor.GridChanged += () => editState = true; // 값 변경 감지
+            nemoEditor.GridChanged += GridChangeState; 
             CenterComponents();
+        }
+
+        private void GridChangeState()
+        {
+            if (!editState)
+            {
+                editState = true;   // 값 변경 감지
+                this.Text += "*";
+            }
         }
 
         private void CenterComponents()
@@ -143,22 +153,43 @@ namespace Nemone
         private void btnSave_Click(object sender, EventArgs e)
         {
             sfd.Filter = "Nemo Files (*.nemo)|*.nemo";
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (sfd.FileName == "")
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    nemoEditor.SaveToFile(sfd.FileName);
+                    this.Text = Path.GetFileNameWithoutExtension(sfd.FileName);
+                    editState = false;
+                }
+            }
+            else
             {
                 nemoEditor.SaveToFile(sfd.FileName);
-                MessageBox.Show("저장되었습니다");
+                this.Text = Path.GetFileNameWithoutExtension(sfd.FileName);
                 editState = false;
-                this.Close();
             }
-            sfd.FileName = "";
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
             ofd.Filter = "Nemo Files (*.nemo)|*.nemo";
+
+            if (editState)
+            {
+                var result = MessageBox.Show("변경하면 내용이 초기화됩니다.\n계속하시겠습니까?",
+                                     "확인",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                    return;
+            }
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 nemoEditor.LoadFromFile(ofd.FileName);
+                sfd.FileName = ofd.FileName;
+                this.Text = Path.GetFileNameWithoutExtension(sfd.FileName);
 
                 // 라디오 버튼 변경
                 var radioMap = new Dictionary<int, RadioButton>
@@ -187,6 +218,17 @@ namespace Nemone
         {
             ofd.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
 
+            if (editState)
+            {
+                var result = MessageBox.Show("변경하면 내용이 초기화됩니다.\n계속하시겠습니까?",
+                                     "확인",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                    return;
+            }
+
             if (ofd.ShowDialog() == DialogResult.OK) 
             {
                 string imagePath = ofd.FileName;
@@ -202,6 +244,9 @@ namespace Nemone
                 }
             }
             ofd.FileName = "";
+            sfd.FileName = "";
+            this.Text = "네모 만들기*";
+            editState = true;
         }
 
         private void Before_FormClosing(object sender, FormClosingEventArgs e)

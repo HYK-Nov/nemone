@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Nemone
 {
@@ -16,7 +16,22 @@ namespace Nemone
     {
         public List<List<int>> rowHints { get; private set; }
         public List<List<int>> colHints { get; private set; }
+        public int PuzzleId { get; private set; }
+        public string Title { get; private set; }
         private int[,] solutionGrid;
+        public bool IsCompleted { get; private set; }
+
+        public NemoPlayer(PlayStatus playStatus)
+        {
+            InitializeComponent();
+
+            LoadFromPlayStatus(playStatus);
+            GetRowHints();
+            GetColHints();
+
+            Invalidate();
+        }
+
 
         public NemoPlayer(string filePath)
         {
@@ -25,6 +40,8 @@ namespace Nemone
             LoadFromFile(filePath);
             GetRowHints();
             GetColHints();
+
+            Invalidate();
         }
 
         private void GetRowHints()
@@ -102,8 +119,8 @@ namespace Nemone
             bool isCorrect = await IsCorrectAsync();
             if (isCorrect)
             {
+                IsCompleted = true;
                 MessageBox.Show("완성!", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.FindForm().Close();
             }
         }
 
@@ -118,11 +135,22 @@ namespace Nemone
         override public void LoadFromFile(string filePath)
         {
             string json = File.ReadAllText(filePath);
-            var data = JsonSerializer.Deserialize<NemoData>(json);
+            var data = JsonConvert.DeserializeObject<NemoData>(json);
 
             if (data == null || data.GridSize <= 0 || data.GridState == null) return;
 
+            this.Title = data.Title;
             this.GridSize = data.GridSize;
+            this.PuzzleId = NemoDB.EnsurePuzzleInDb(data.Title, data.GridSize, data.GridState);
+
+            // 플레이 내역 확인
+            PlayStatus existingStatus = NemoDB.LoadPlayStatusByPuzzleId(PuzzleId);
+            if (existingStatus != null)
+            {
+                // 기존 저장된 상태 불러오기
+                this.GridState = existingStatus.Process;
+            }
+
             solutionGrid = new int[data.GridSize, data.GridSize];
 
             for (int y = 0; y < GridSize; y++)
@@ -134,6 +162,37 @@ namespace Nemone
             }
 
             Invalidate();
+        }
+
+        public void LoadFromPlayStatus(PlayStatus playStatus)
+        {
+            if (playStatus == null || playStatus.Process == null) return;
+
+            this.Title = playStatus.Title;
+            this.PuzzleId = playStatus.PuzzleId;
+            this.IsCompleted = playStatus.IsCompleted;
+
+            // 1) DB에서 퍼즐 정답 불러오기
+            int[,] originalSolution = NemoDB.GetPuzzleSolutionById(playStatus.PuzzleId);
+            if (originalSolution == null)
+            {
+                MessageBox.Show("퍼즐 데이터를 불러올 수 없습니다.");
+                return;
+            }
+
+            this.GridSize = originalSolution.GetLength(0);
+            solutionGrid = originalSolution;
+
+            // 2) 진행 상태인 Process를 GridState에 복사
+            GridState = new int[GridSize, GridSize];
+
+            for (int y = 0; y < GridSize; y++)
+            {
+                for (int x = 0; x < GridSize; x++)
+                {
+                    GridState[y, x] = playStatus.Process[y, x];
+                }
+            }
         }
 
         override protected void OnResize(EventArgs e)

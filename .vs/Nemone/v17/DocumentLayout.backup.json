@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\editorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:editorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\editorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:editorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\basenemogridcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:basenemogridcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|d:\\study\\kosta\\c#\\\uD504\uB85C\uC81D\uD2B8\\nemone\\mainhubform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EBBA727-33B1-41FB-ABDB-8B13DC9BF343}|Nemone.csproj|solutionrelative:mainhubform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +26,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BaseNemoGridControl.cs",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\BaseNemoGridControl.cs",
-              "RelativeDocumentMoniker": "BaseNemoGridControl.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\BaseNemoGridControl.cs",
-              "RelativeToolTip": "BaseNemoGridControl.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAA9wD8AAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T11:54:13.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EditorForm.cs",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\EditorForm.cs",
-              "RelativeDocumentMoniker": "EditorForm.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\EditorForm.cs",
-              "RelativeToolTip": "EditorForm.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAgwJUAAAAiAAAAAAAAAA==",
+              "Title": "MainHubForm.cs",
+              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MainHubForm.cs",
+              "RelativeDocumentMoniker": "MainHubForm.cs",
+              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\MainHubForm.cs",
+              "RelativeToolTip": "MainHubForm.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAswFsAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T11:32:08.548Z",
+              "WhenOpened": "2025-05-15T11:24:59.082Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EditorForm.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\EditorForm.cs",
-              "RelativeDocumentMoniker": "EditorForm.cs",
-              "ToolTip": "D:\\Study\\kosta\\C#\\\uD504\uB85C\uC81D\uD2B8\\Nemone\\EditorForm.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "EditorForm.cs [\uB514\uC790\uC778]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T11:32:01.234Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
             }
           ]
         }

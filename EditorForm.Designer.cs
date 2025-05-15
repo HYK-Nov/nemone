@@ -224,7 +224,7 @@
             this.MinimumSize = new System.Drawing.Size(1280, 800);
             this.Name = "EditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "nemone";
+            this.Text = "네모 만들기";
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             this.tableLayout.ResumeLayout(false);

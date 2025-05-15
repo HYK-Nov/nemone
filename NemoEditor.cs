@@ -11,12 +11,13 @@ using System.Configuration;
 using System.IO;
 using static System.Windows.Forms.AxHost;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Nemone
 {
     public partial class NemoEditor: BaseNemoGridControl
     {
+        private string fileName = "";
         public NemoEditor() { }
 
         public event Action GridChanged;
@@ -46,15 +47,14 @@ namespace Nemone
                 }
             }
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(data, options);
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(filePath, json);
         }
 
         public override void LoadFromFile(string filePath)
         {
             string json = File.ReadAllText(filePath);
-            var data = JsonSerializer.Deserialize<NemoData>(json);
+            var data = JsonConvert.DeserializeObject<NemoData>(json);
 
             if (data == null || data.GridSize <= 0 || data.GridState == null) return;
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using System.Xml.Linq;
+using System.Data.SQLite;
 
 namespace Nemone
 {
@@ -35,6 +36,28 @@ namespace Nemone
             tableLayoutPanel.Controls.Add(colHint, 1, 0);
 
             this.Resize += PlayForm_Resize;
+            this.FormClosed += PlayForm_Closed;
+            CenterComponents();
+        }
+
+        public PlayForm(PlayStatus playStatus)
+        {
+            InitializeComponent();
+
+            nemoPlayer = new NemoPlayer(playStatus);
+
+            tableLayoutPanel.Controls.Add(nemoPlayer, 1, 1);
+
+            rowHint = new RowHintControl(nemoPlayer.rowHints);
+            rowHint.Dock = DockStyle.Right;
+            colHint = new ColHintControl(nemoPlayer.colHints);
+            colHint.Dock = DockStyle.Bottom;
+
+            tableLayoutPanel.Controls.Add(rowHint, 0, 1);
+            tableLayoutPanel.Controls.Add(colHint, 1, 0);
+
+            this.Resize += PlayForm_Resize;
+            this.FormClosed += PlayForm_Closed;
             CenterComponents();
         }
 
@@ -63,6 +86,21 @@ namespace Nemone
         private void PlayForm_Resize(object sender, EventArgs e)
         {
             CenterComponents();
+        }
+
+        private void PlayForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            NemoDB.SavePlayStatus(nemoPlayer.PuzzleId, nemoPlayer.Title, nemoPlayer.GridState, nemoPlayer.IsCompleted);
+        }
+
+        public Bitmap CaptureTableLayoutPanel()
+        {
+            if (tableLayoutPanel == null || tableLayoutPanel.Width == 0 || tableLayoutPanel.Height == 0)
+                return null;
+
+            Bitmap bmp = new Bitmap(tableLayoutPanel.Width, tableLayoutPanel.Height);
+            tableLayoutPanel.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            return bmp;
         }
 
     }

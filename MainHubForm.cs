@@ -10,34 +10,27 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Security.Cryptography;
+using System.Diagnostics;
+
 
 namespace Nemone
 {
-    public partial class MainHubForm: Form
+    public partial class MainHubForm : Form
     {
 
         public MainHubForm()
         {
             InitializeComponent();
-            MainHubLayout();
-        }
-
-        private void MainHubLayout()
-        {
-            Panel bottomSpacer = new Panel
-            {
-                Height = 80,
-                Width = 10,
-                Margin = new Padding(0),
-                Enabled = false
-            };
-            flowLayoutPanel.Controls.Add(bottomSpacer);
+            NemoDB.InitDatabase();
         }
 
         private void OtherForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // 두 번째 폼이 닫힐 때 첫 번째 폼도 종료
             this.Show();
+            MainHubForm_Load(null, null);
         }
 
         private void btnNewMake_Click(object sender, EventArgs e)
@@ -54,10 +47,132 @@ namespace Nemone
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                ofd.FileName = "";
                 PlayForm playForm = new PlayForm(ofd.FileName);
                 playForm.FormClosed += OtherForm_FormClosed;
                 playForm.Show();
                 this.Hide();
+            }
+        }
+
+        private void MainHubForm_Load(object sender, EventArgs e)
+        {
+            var playStatuses = NemoDB.LoadPlayStatus();
+
+            flowLayoutPanel.Controls.Clear();
+
+            foreach (var status in playStatuses)
+            {
+                var btn = new Button();
+                btn.Text = $"{status.Title} {(status.IsCompleted ? "\r\n완성" : "")}";
+                btn.Tag = status;
+                btn.Width = 100;
+                btn.Height = 100;
+
+                btn.Click += PlayStatusBtn_Click;
+
+                flowLayoutPanel.Controls.Add(btn);
+            }
+        }
+
+        private void PlayStatusBtn_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            if (btn == null) return;
+
+            var playStatus = btn.Tag as PlayStatus;
+            if (playStatus == null) return;
+
+            PlayForm playForm = new PlayForm(playStatus);
+            playForm.FormClosed += OtherForm_FormClosed;
+            playForm.Show();
+            this.Hide();
+        }
+
+        private async void btnExportPdf_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                PlayForm playForm = new PlayForm(ofd.FileName);
+                // 완전 투명하게 만들고 보이게 하기
+                playForm.Opacity = 0;
+                playForm.Show();
+
+                // 강제로 레이아웃 다시 계산 및 렌더링 대기
+                playForm.PerformLayout();
+                playForm.Refresh();
+                await Task.Delay(100);  // 0.1초 대기 (렌더링 안정화용)
+
+
+                sfd.Filter = "PDF 파일 (*.pdf)|*.pdf";
+                sfd.FileName = "퍼즐결과.pdf";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    SavePlayFormAsPdf(playForm, sfd.FileName);
+                    MessageBox.Show("PDF로 저장되었습니다!", "완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // PDF 저장 후 폼 닫기
+                playForm.Close();
+            }
+        }
+
+        private void SavePlayFormAsPdf(PlayForm playForm, string filePath)
+        {
+            //using (Bitmap bmp = ResizeBitmap(playForm.CaptureTableLayoutPanel(), 500, 500))
+            using (Bitmap bmp = playForm.CaptureTableLayoutPanel())
+            {
+                if (bmp == null)
+                {
+                    MessageBox.Show("캡처할 컨트롤이 없습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (PdfDocument document = new PdfDocument())
+                {
+                    PdfPage page = document.AddPage();
+
+                    // A4 용지 크기로 설정 (포인트 단위)
+                    page.Width = XUnit.FromMillimeter(210);
+                    page.Height = XUnit.FromMillimeter(297);
+
+                    // 패딩 값 (포인트 단위)
+                    double padding = 20;
+
+                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            ms.Position = 0;
+
+                            using (XImage image = XImage.FromStream(ms))
+                            {
+                                double maxWidth = page.Width.Point - 2 * padding;
+                                double maxHeight = page.Height.Point - 2 * padding;
+
+                                double imgWidth = image.PixelWidth * 72.0 / image.HorizontalResolution;
+                                double imgHeight = image.PixelHeight * 72.0 / image.VerticalResolution;
+
+                                double ratioX = maxWidth / imgWidth;
+                                double ratioY = maxHeight / imgHeight;
+                                double ratio = Math.Min(ratioX, ratioY);
+
+                                double drawWidth = imgWidth * ratio;
+                                double drawHeight = imgHeight * ratio;
+
+                                // 패딩을 고려해서 중앙 정렬
+                                double posX = padding + (maxWidth - drawWidth) / 2;
+                                double posY = padding + (maxHeight - drawHeight) / 2;
+
+                                gfx.DrawImage(image, posX, posY, drawWidth, drawHeight);
+                            }
+                        }
+                    }
+
+                    document.Save(filePath);
+                }
             }
         }
     }
