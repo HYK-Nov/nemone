@@ -72,3 +72,4 @@ D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.Threading.Tasks.Extension
 D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\System.ValueTuple.xml
 D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\de\PdfSharp.resources.dll
 D:\Study\kosta\C#\프로젝트\Nemone\bin\Debug\de\PdfSharp.Charting.resources.dll
+D:\Study\kosta\C#\프로젝트\Nemone\obj\Debug\Nemone.ProgressForm.resources

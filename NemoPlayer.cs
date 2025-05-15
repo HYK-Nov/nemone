@@ -20,6 +20,7 @@ namespace Nemone
         public string Title { get; private set; }
         private int[,] solutionGrid;
         public bool IsCompleted { get; private set; }
+        private bool isExport;
 
         public NemoPlayer(PlayStatus playStatus)
         {
@@ -33,9 +34,10 @@ namespace Nemone
         }
 
 
-        public NemoPlayer(string filePath)
+        public NemoPlayer(string filePath, bool isExport = false)
         {
             InitializeComponent();
+            this.isExport = isExport;
 
             LoadFromFile(filePath);
             GetRowHints();
@@ -141,14 +143,17 @@ namespace Nemone
 
             this.Title = data.Title;
             this.GridSize = data.GridSize;
-            this.PuzzleId = NemoDB.EnsurePuzzleInDb(data.Title, data.GridSize, data.GridState);
 
-            // 플레이 내역 확인
-            PlayStatus existingStatus = NemoDB.LoadPlayStatusByPuzzleId(PuzzleId);
-            if (existingStatus != null)
+            if (isExport == false)
             {
-                // 기존 저장된 상태 불러오기
-                this.GridState = existingStatus.Process;
+                this.PuzzleId = NemoDB.EnsurePuzzleInDb(data.Title, data.GridSize, data.GridState);
+                // 플레이 내역 확인
+                PlayStatus existingStatus = NemoDB.LoadPlayStatusByPuzzleId(PuzzleId);
+                if (existingStatus != null)
+                {
+                    // 기존 저장된 상태 불러오기
+                    this.GridState = existingStatus.Process;
+                }
             }
 
             solutionGrid = new int[data.GridSize, data.GridSize];

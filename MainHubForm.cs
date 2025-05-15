@@ -47,12 +47,12 @@ namespace Nemone
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ofd.FileName = "";
                 PlayForm playForm = new PlayForm(ofd.FileName);
                 playForm.FormClosed += OtherForm_FormClosed;
                 playForm.Show();
                 this.Hide();
             }
+            ofd.FileName = "";
         }
 
         private void MainHubForm_Load(object sender, EventArgs e)
@@ -64,10 +64,11 @@ namespace Nemone
             foreach (var status in playStatuses)
             {
                 var btn = new Button();
-                btn.Text = $"{status.Title} {(status.IsCompleted ? "\r\n완성" : "")}";
+                btn.Text = $"{status.Title} {(status.IsCompleted ? "\r\n\r\n완성" : "")}";
                 btn.Tag = status;
-                btn.Width = 100;
-                btn.Height = 100;
+                btn.BackColor = Color.White;
+                btn.Width = 80;
+                btn.Height = 80;
 
                 btn.Click += PlayStatusBtn_Click;
 
@@ -91,9 +92,11 @@ namespace Nemone
 
         private async void btnExportPdf_Click(object sender, EventArgs e)
         {
+            ofd.Filter = "Nemo Files (*.nemo)|*.nemo";
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                PlayForm playForm = new PlayForm(ofd.FileName);
+                PlayForm playForm = new PlayForm(ofd.FileName, true);
                 // 완전 투명하게 만들고 보이게 하기
                 playForm.Opacity = 0;
                 playForm.Show();
@@ -105,12 +108,29 @@ namespace Nemone
 
 
                 sfd.Filter = "PDF 파일 (*.pdf)|*.pdf";
-                sfd.FileName = "퍼즐결과.pdf";
+                sfd.FileName = $"{Path.GetFileNameWithoutExtension(ofd.FileName)}.pdf";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    SavePlayFormAsPdf(playForm, sfd.FileName);
-                    MessageBox.Show("PDF로 저장되었습니다!", "완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // ProgressForm을 비모달로 띄움
+                    ProgressForm progress = new ProgressForm();
+                    progress.StartPosition = FormStartPosition.CenterParent;
+                    progress.Show();
+
+                    // 백그라운드 작업
+                    await Task.Run(() =>
+                    {
+                        SavePlayFormAsPdf(playForm, sfd.FileName);
+
+                        // UI 스레드로 돌아와서 progress 닫기
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            progress.Close();
+                            progress.Dispose();
+                        }));
+
+                        MessageBox.Show("PDF 내보내기 완료");
+                    });
                 }
 
                 // PDF 저장 후 폼 닫기
@@ -120,7 +140,6 @@ namespace Nemone
 
         private void SavePlayFormAsPdf(PlayForm playForm, string filePath)
         {
-            //using (Bitmap bmp = ResizeBitmap(playForm.CaptureTableLayoutPanel(), 500, 500))
             using (Bitmap bmp = playForm.CaptureTableLayoutPanel())
             {
                 if (bmp == null)

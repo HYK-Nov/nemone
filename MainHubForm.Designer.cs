@@ -96,10 +96,11 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Padding = new System.Windows.Forms.Padding(100, 0, 100, 0);
+            this.flowLayoutPanel.Padding = new System.Windows.Forms.Padding(100, 30, 100, 30);
             this.flowLayoutPanel.Size = new System.Drawing.Size(980, 696);
             this.flowLayoutPanel.TabIndex = 0;
             // 
@@ -115,7 +116,7 @@
             this.MaximizeBox = false;
             this.Name = "MainHubForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "nemone";
+            this.Text = "네모네";
             this.Load += new System.EventHandler(this.MainHubForm_Load);
             this.container.Panel1.ResumeLayout(false);
             this.container.Panel2.ResumeLayout(false);

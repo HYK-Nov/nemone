@@ -20,11 +20,11 @@ namespace Nemone
         private RowHintControl rowHint;
         private ColHintControl colHint;
 
-        public PlayForm(string filePath)
+        public PlayForm(string filePath, bool isExport = false)
         {
             InitializeComponent();
 
-            nemoPlayer = new NemoPlayer(filePath);
+            nemoPlayer = new NemoPlayer(filePath, isExport);
             tableLayoutPanel.Controls.Add(nemoPlayer, 1, 1);
 
             rowHint = new RowHintControl(nemoPlayer.rowHints);
@@ -35,8 +35,12 @@ namespace Nemone
             tableLayoutPanel.Controls.Add(rowHint, 0, 1);
             tableLayoutPanel.Controls.Add(colHint, 1, 0);
 
+            this.Text = Path.GetFileNameWithoutExtension(filePath);
             this.Resize += PlayForm_Resize;
-            this.FormClosed += PlayForm_Closed;
+            if (isExport == false)
+            {
+                this.FormClosed += PlayForm_Closed;
+            }
             CenterComponents();
         }
 
@@ -56,6 +60,7 @@ namespace Nemone
             tableLayoutPanel.Controls.Add(rowHint, 0, 1);
             tableLayoutPanel.Controls.Add(colHint, 1, 0);
 
+            this.Text = playStatus.Title;
             this.Resize += PlayForm_Resize;
             this.FormClosed += PlayForm_Closed;
             CenterComponents();
