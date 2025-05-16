@@ -132,29 +132,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseNemoGridControl.cs">
+    <Compile Include="Controller\BaseNemoGridControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BaseNemoGridControl.Designer.cs">
+    <Compile Include="Controller\BaseNemoGridControl.Designer.cs">
       <DependentUpon>BaseNemoGridControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ColHintControl.cs">
+    <Compile Include="Controller\ColHintControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ColHintControl.Designer.cs">
+    <Compile Include="Controller\ColHintControl.Designer.cs">
       <DependentUpon>ColHintControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="NemoData.cs" />
-    <Compile Include="NemoPlayer.cs">
+    <Compile Include="Model\NemoData.cs" />
+    <Compile Include="Controller\NemoPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NemoPlayer.Designer.cs">
+    <Compile Include="Controller\NemoPlayer.Designer.cs">
       <DependentUpon>NemoPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImageBinarizeForm.cs">
+    <Compile Include="Form\ImageBinarizeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageBinarizeForm.Designer.cs">
+    <Compile Include="Form\ImageBinarizeForm.Designer.cs">
       <DependentUpon>ImageBinarizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainHubForm.cs">
@@ -163,58 +163,58 @@
     <Compile Include="MainHubForm.Designer.cs">
       <DependentUpon>MainHubForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorForm.cs">
+    <Compile Include="Form\EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditorForm.Designer.cs">
+    <Compile Include="Form\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NemoEditor.cs">
+    <Compile Include="Controller\NemoEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NemoEditor.Designer.cs">
+    <Compile Include="Controller\NemoEditor.Designer.cs">
       <DependentUpon>NemoEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayForm.cs">
+    <Compile Include="Form\PlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlayForm.Designer.cs">
+    <Compile Include="Form\PlayForm.Designer.cs">
       <DependentUpon>PlayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="ProgressForm.cs">
+    <Compile Include="Controller\ProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProgressForm.Designer.cs">
+    <Compile Include="Controller\ProgressForm.Designer.cs">
       <DependentUpon>ProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NemoDB.cs" />
-    <Compile Include="RowHintControl.cs">
+    <Compile Include="Service\NemoDB.cs" />
+    <Compile Include="Controller\RowHintControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="RowHintControl.Designer.cs">
+    <Compile Include="Controller\RowHintControl.Designer.cs">
       <DependentUpon>RowHintControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="NemoPlayer.resx">
+    <EmbeddedResource Include="Controller\NemoPlayer.resx">
       <DependentUpon>NemoPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImageBinarizeForm.resx">
+    <EmbeddedResource Include="Form\ImageBinarizeForm.resx">
       <DependentUpon>ImageBinarizeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainHubForm.resx">
       <DependentUpon>MainHubForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorForm.resx">
+    <EmbeddedResource Include="Form\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NemoEditor.resx">
+    <EmbeddedResource Include="Controller\NemoEditor.resx">
       <DependentUpon>NemoEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayForm.resx">
+    <EmbeddedResource Include="Form\PlayForm.resx">
       <DependentUpon>PlayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProgressForm.resx">
+    <EmbeddedResource Include="Controller\ProgressForm.resx">
       <DependentUpon>ProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -227,7 +227,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RowHintControl.resx">
+    <EmbeddedResource Include="Controller\RowHintControl.resx">
       <DependentUpon>RowHintControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
