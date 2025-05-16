@@ -47,6 +47,10 @@ Nemone/
 └── README.md             # 프로젝트 설명서
 ```
 
+## ✅실행
+
+> [Release 다운로드](https://github.com/HYK-Nov/nemone/releases)
+
 ## 🛠️기술 스택
 
 <p align="center">
