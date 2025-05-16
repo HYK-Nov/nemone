@@ -61,7 +61,7 @@ Nemone/
 -   **언어**: C#
 -   **프레임워크**: .NET Framework (Windows Forms)
 -  **Nuget 패키지**
-	-  **PdfSharp**: 
-	-  **System.Data.SQLite**:
-	-  **Newtonsoft.Json**: 
+	-  **PdfSharp**: PDF내보내기
+	-  **System.Data.SQLite**: 퍼즐 진행상황 저장
+	-  **Newtonsoft.Json**: Json 파싱
 -   **개발 환경**: Visual Studio
